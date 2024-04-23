@@ -28,5 +28,4 @@ test:
 production:
   <<: *default
   adapter: postgresql
-  database: test_reactdb_production
   url: <%= ENV['DATABASE_URL'] %>
