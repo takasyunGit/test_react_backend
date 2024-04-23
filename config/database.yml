@@ -5,16 +5,18 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  encoding: utf8
 
 development:
   <<: *default
   host: 127.0.0.1
+  adapter: mysql2
   username: user
   password: p@ssw0rd
   database: reactdb
+  post: 5432
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,4 +27,6 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
   database: db/production.sqlite3
+  url: <%= ENV['DATABASE_URL'] %>
