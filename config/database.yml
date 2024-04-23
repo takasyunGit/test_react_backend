@@ -28,5 +28,5 @@ test:
 production:
   <<: *default
   adapter: postgresql
-  database: db/production.sqlite3
+  database: test_reactdb_production
   url: <%= ENV['DATABASE_URL'] %>
