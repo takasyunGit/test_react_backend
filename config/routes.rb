@@ -33,4 +33,6 @@ Rails.application.routes.draw do
       resources :vendor_offer_chats, only: %i[index create]
     end
   end
+
+  get '*path', controller: 'application', action: 'render_404'
 end
