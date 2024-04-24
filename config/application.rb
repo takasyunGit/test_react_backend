@@ -39,7 +39,7 @@ module RailsApp
     config.i18n.default_locale = :ja
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins "http://localhost:3000"
+        origins "http://localhost:3000", "https://test-react-frontend-m17w.onrender.com"
         resource "*",
           headers: :any,
           expose: ["access-token", "expiry", "token-type", "uid", "client"],
