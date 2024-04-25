@@ -1,6 +1,4 @@
 class Api::V1::VendorUser::VendorOffersController < ApplicationController
-  include Api::V1::Concerns::SetImageUrl
-
   NUMBER_OF_PER_PAGE = 10
 
   before_action :authenticate_api_v1_vendor_user!
@@ -16,7 +14,6 @@ class Api::V1::VendorUser::VendorOffersController < ApplicationController
       .where(user_offer_id: params[:user_offer_id])
       .where(vendor_users: { vendor_id: current_api_v1_vendor_user.vendor_id})
     @objects = @objects.paginate_order(params[:key_id], "desc", NUMBER_OF_PER_PAGE, "updated_at")
-    set_avatar_img_url(@objects[:records])
 
     render json: { data: @objects }
   end

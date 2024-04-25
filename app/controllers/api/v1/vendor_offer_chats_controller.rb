@@ -1,7 +1,5 @@
 require 'uri'
 class Api::V1::VendorOfferChatsController < ApplicationController
-  include Api::V1::Concerns::SetImageUrl
-
   NUMBER_OF_PER_PAGE = 10
 
   before_action :common_authentication!
@@ -22,7 +20,6 @@ class Api::V1::VendorOfferChatsController < ApplicationController
         SQL
       )
     @objects = @objects.paginate_order(params[:key_id], "desc", NUMBER_OF_PER_PAGE, "created_at")
-    set_avatar_img_url(@objects[:records])
 
     render json: { data: @objects }
   end
