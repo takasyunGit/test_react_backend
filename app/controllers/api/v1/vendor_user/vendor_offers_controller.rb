@@ -27,7 +27,7 @@ class Api::V1::VendorUser::VendorOffersController < ApplicationController
       .select("vendor_offers.*, users.name")
       .from(from_table, :vendor_offers)
       .joins(user_offer: :user)
-    @images =  @object.first.vendor_offer_images
+    @images = @object.first.vendor_offer_images
     if @object
       render json: { data: { vendor_offer: @object.first, images: @images } }
     else
