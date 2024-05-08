@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_20_062012) do
+ActiveRecord::Schema.define(version: 2024_05_08_073410) do
 
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2024_04_20_062012) do
     t.datetime "updated_at", precision: 6, null: false
     t.json "images"
     t.date "deadline"
+    t.integer "status", default: 1
     t.index ["prefecture"], name: "index_user_offers_on_prefecture"
     t.index ["user_id"], name: "index_user_offers_on_user_id"
   end

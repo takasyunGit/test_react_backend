@@ -57,7 +57,28 @@ ActiveRecord::Base.transaction do
 ・キッチン、リビング、庭先が一体となるように視線が通るようにしたい",
     request_type: 1,
     deadline: "2024-12-26",
+    status: 2,
     images: [File.open(Rails.root.join("public/seed/island_kitchen.jpg"))]
+  )
+
+  user_offer = user.user_offers.create!(
+    prefecture: 13,
+    address: "テスト市テスト町1-1-1",
+    budget: 35000000,
+    remark: "テスト",
+    request_type: 2,
+    deadline: "2024-02-26",
+    status: 3
+  )
+
+  user_offer = user.user_offers.create!(
+    prefecture: 13,
+    address: "テスト市テスト町2-2-2",
+    budget: 35000000,
+    remark: "テスト",
+    request_type: 3,
+    deadline: "2023-12-26",
+    status: 4
   )
 
   other.user_offers.create!(
@@ -70,6 +91,7 @@ ActiveRecord::Base.transaction do
 ・冬は薪ストーブをメインに暖をとりたい",
     request_type: 1,
     deadline: "2024-11-06",
+    status: 2,
     images: [File.open(Rails.root.join("public/seed/outdoor_house.jpg"))]
   )
 
@@ -80,7 +102,8 @@ ActiveRecord::Base.transaction do
       budget: 5000000,
       remark: "テスト要望",
       request_type: 2,
-      deadline: "2024-11-06"
+      deadline: "2024-11-06",
+      status: 2
     )
   end
 
