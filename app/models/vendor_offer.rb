@@ -1,8 +1,6 @@
 class VendorOffer < ApplicationRecord
   MAXIMUM_TITLE_LENGTH = 100
 
-  mount_uploader :avatar, AvatarUploader
-
   has_many :vendor_offer_chats, dependent: :destroy
   has_many :vendor_offer_images, dependent: :destroy
 
