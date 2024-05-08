@@ -25,6 +25,7 @@ class Api::V1::User::UserOffersController < ApplicationController
 
   def create
     @object = current_user.user_offers.new(user_offer_params)
+    @object.status = USER_OFFER_STATUS_PROPOSAL
     @object.save!
     render json: { data: @object }
   end
