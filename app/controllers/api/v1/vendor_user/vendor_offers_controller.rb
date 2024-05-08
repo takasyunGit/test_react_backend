@@ -1,9 +1,13 @@
+require 'carrierwave'
+
 class Api::V1::VendorUser::VendorOffersController < ApplicationController
   NUMBER_OF_PER_PAGE = 10
 
   before_action :authenticate_api_v1_vendor_user!
 
   def index
+    # Modelに記載するとvendorOffer作成時にエラーが発生する
+    VendorOffer.mount_uploader(:avatar, AvatarUploader)
     @objects = VendorOffer.select(
         <<~SQL.gsub(/\n/," ")
           vendor_offers.*,
@@ -14,7 +18,6 @@ class Api::V1::VendorUser::VendorOffersController < ApplicationController
       .where(user_offer_id: params[:user_offer_id])
       .where(vendor_users: { vendor_id: current_api_v1_vendor_user.vendor_id})
     @objects = @objects.paginate_order(params[:key_id], "desc", NUMBER_OF_PER_PAGE, "updated_at")
-
     render json: { data: @objects }
   end
 

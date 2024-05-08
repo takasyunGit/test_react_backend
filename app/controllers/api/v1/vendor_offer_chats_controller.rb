@@ -5,6 +5,8 @@ class Api::V1::VendorOfferChatsController < ApplicationController
   before_action :common_authentication!
 
   def index
+    # Modelに記載するとvendorOfferChat作成時にエラーが発生する
+    VendorOfferChat.mount_uploader(:avatar, AvatarUploader)
     @objects = VendorOfferChat.select(
         <<~SQL.gsub(/\n/," ")
           vendor_offer_chats.*,
