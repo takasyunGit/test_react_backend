@@ -2,7 +2,11 @@ class Api::V1::User::UserOffersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @object = UserOffer.where(user_id: current_user.id).order(created_at: :desc)
+    drafts = UserOffer.where(user_id: current_user.id, status: USER_OFFER_STATUS_DRAFT).order(created_at: :desc)
+    proposals = UserOffer.where(user_id: current_user.id, status: [USER_OFFER_STATUS_PROPOSAL, USER_OFFER_STATUS_OVERDUE]).order(status: :asc).order(deadline: :desc)
+    finished = UserOffer.where(user_id: current_user.id, status: USER_OFFER_STATUS_FINISHED).order(deadline: :desc)
+    @object = { draft: drafts, proposal: proposals, finished: finished }
+
     render json: { data: @object }
   end
 
@@ -21,6 +25,7 @@ class Api::V1::User::UserOffersController < ApplicationController
 
   def create
     @object = current_user.user_offers.new(user_offer_params)
+    @object.status = USER_OFFER_STATUS_PROPOSAL
     @object.save!
     render json: { data: @object }
   end

@@ -10,35 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_20_062012) do
-
-  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
-  end
-
-  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "blob_id", null: false
-    t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
+ActiveRecord::Schema.define(version: 2024_05_08_073410) do
 
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -81,6 +53,7 @@ ActiveRecord::Schema.define(version: 2024_04_20_062012) do
     t.datetime "updated_at", precision: 6, null: false
     t.json "images"
     t.date "deadline"
+    t.integer "status", default: 1
     t.index ["prefecture"], name: "index_user_offers_on_prefecture"
     t.index ["user_id"], name: "index_user_offers_on_user_id"
   end
@@ -115,7 +88,7 @@ ActiveRecord::Schema.define(version: 2024_04_20_062012) do
     t.integer "user_id"
     t.integer "vendor_user_id"
     t.integer "vendor_offer_id"
-    t.string "message", null: false
+    t.text "message", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_vendor_offer_chats_on_user_id"
@@ -129,17 +102,6 @@ ActiveRecord::Schema.define(version: 2024_04_20_062012) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["vendor_offer_id"], name: "index_vendor_offer_images_on_vendor_offer_id"
-  end
-
-  create_table "vendor_offer_messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "vendor_user_id"
-    t.integer "user_id"
-    t.text "message"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "vendor_offer_id"
-    t.index ["user_id"], name: "index_vendor_offer_messages_on_user_id"
-    t.index ["vendor_user_id"], name: "index_vendor_offer_messages_on_vendor_user_id"
   end
 
   create_table "vendor_offers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -191,6 +153,4 @@ ActiveRecord::Schema.define(version: 2024_04_20_062012) do
     t.index ["prefecture"], name: "index_vendors_on_prefecture"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 end
