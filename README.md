@@ -1,24 +1,6 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# サイトを使用する場合の流れ
+ユーザーがどのような家を建てたい、またはリフォームしたいかを要望と予算を提示する
+↓
+ベンダーがその要望を確認し、どのような提案ができるかを提示する
+↓
+ユーザー側がそれらの提案の中から一つを選ぶ。
